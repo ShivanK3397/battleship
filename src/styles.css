@@ -1,0 +1,17 @@
+.square,.hit,.ship{
+    border: 2px solid;
+    width: 32px;
+    height: 32px;
+}
+
+.container{
+    display: flex;
+}
+
+.ship{
+    background-color: black;
+}
+
+.hit{
+    background-color: red;
+}
