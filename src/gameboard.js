@@ -1,3 +1,5 @@
+import { Ship } from "./ship";
+
 class Gameboard{
     constructor(){
         this.board = [[null,null,null,null,null,null,null,null,null,null],
@@ -25,8 +27,8 @@ class Gameboard{
                 //Do Nothing
             }
             else{
-            for (let i= x;i<ship.getLength()+x;i++){
-                this.board[i][y]=ship;
+            for (let i= y;i<ship.getLength()+y;i++){
+                this.board[x][i]=ship;
                 
             }
             }
@@ -36,8 +38,8 @@ class Gameboard{
                 //Do Nothing 
             }
             else{
-            for (let i= y;i<ship.getLength()+y;i++){
-                this.board[x][i]=ship;
+            for (let i= x;i<ship.getLength()+x;i++){
+                this.board[i][y]=ship;
             }
             }
         }
@@ -46,16 +48,16 @@ class Gameboard{
     }
 
     recieveAttack(x,y){
-        if (this.board[x,y]===null){
+        if (this.board[x][y]===null){
             this.missedAttacks.push([x,y])
         }
-        else if(this.board[x,y]==="hit"){
+        else if(this.board[x][y]==="hit"){
             //Do Nothing
         }
         else{
-            const ship = this.board[x,y]
-            this.board[x,y]="hit";
-            ship.hit();
+            const ship = this.board[x][y];
+            this.board[x][y]="hit";
+            ship.getHit();
             if (ship.isSunk()){
                 const index = this.ships.indexOf(ship);
                 this.ships.slice(index,1);

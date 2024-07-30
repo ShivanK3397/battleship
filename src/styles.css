@@ -6,12 +6,19 @@
 
 .container{
     display: flex;
+   
 }
+
+.gameboards{
+    display: flex;
+    gap: 32px;
+}
+
 
 .ship{
     background-color: black;
 }
 
 .hit{
-    background-color: red;
+    background-color: white;
 }

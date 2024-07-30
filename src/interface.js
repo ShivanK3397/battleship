@@ -1,13 +1,16 @@
 import { Player } from "./player.js"
+import { Ship } from "./ship.js";
+import { Gameboard } from "./gameboard.js";
 
-function createGameboard(player){
+function showGameboard(player){
     const gameboard = player.getGameboard();
     const board = gameboard.getBoard();
     const container = document.createElement("div");
     container.classList.add("container");
     for (let i =0;i<board.length;i++){
-        console.log(i);
+ 
         const row = document.createElement("div");
+        row.classList.add("row");
         
         for (let j = 0;j<board[i].length;j++){
             const square=document.createElement("div");
@@ -34,4 +37,57 @@ function createGameboard(player){
 
 }
 
-export {createGameboard}
+function showBlankGameboard(player){
+    const container = document.createElement("div");
+    container.classList.add("container");
+    for (let i =0;i<10;i++){
+ 
+        const row = document.createElement("div");
+        row.classList.add("row");
+        
+        for (let j = 0;j<10;j++){
+            const square=document.createElement("div");
+            square.dataset.index=`${i}${j}`;
+            square.classList.add("square");
+            square.addEventListener("click",()=>{
+                const gameboard = player.getGameboard();
+                gameboard.recieveAttack(square.dataset.index[0],square.dataset.index[1])
+
+            })
+            row.appendChild(square);
+            
+        }
+        container.appendChild(row);
+
+       
+    }
+    return container;
+}
+
+
+function playGame(){
+    const player1 = new Player("player");
+    const player2 = new Player("player");
+
+    const gameboard = player1.getGameboard();
+    const ship = new Ship(3);
+    gameboard.placeShip(5,5,"vertical",ship);
+    const div = showGameboard(player1);
+    const container = document.querySelector(".player-1-gameboard");
+    container.appendChild(div);
+
+    const gameboard2 = player2.getGameboard();
+    const newShip = new Ship(3);
+    gameboard2.placeShip(5,5,"vertical",newShip);
+
+    const blankGameboard = showBlankGameboard(player2);
+    const blankContainer = document.querySelector(".player-2-gameboard");
+    blankContainer.append(blankGameboard);
+
+
+    
+}
+
+
+
+export {showGameboard,playGame}

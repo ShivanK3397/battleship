@@ -5,7 +5,7 @@ class Ship{
         this.sunk = false;
     }
 
-    hit(){
+    getHit(){
         this.hits++;
     }
 
