@@ -58,6 +58,7 @@ function showBlankGameboard(player){
             
         }
         container.appendChild(row);
+        
 
        
     }
@@ -81,9 +82,23 @@ function playGame(){
     gameboard2.placeShip(5,5,"vertical",newShip);
 
     const blankGameboard = showBlankGameboard(player2);
+   
     const blankContainer = document.querySelector(".player-2-gameboard");
     blankContainer.append(blankGameboard);
+    while(true){
+        console.log('hi');
+        const x = Math.floor(Math.random() * 11);
+        const y = Math.floor(Math.random() * 11);
+        gameboard.recieveAttack(5,5);
+        const toRemove = document.querySelector(".container");
+        toRemove.remove();
+        const newBoard = showGameboard(player1);
+        container.append(newBoard);
+        break
 
+        
+    }
+   
 
     
 }
