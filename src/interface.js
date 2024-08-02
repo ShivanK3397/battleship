@@ -58,10 +58,13 @@ function showBlankGameboard(player1,player2){
                 const x = Math.floor(Math.random() * 11);
                 const y = Math.floor(Math.random() * 11);
                 player1Gameboard.recieveAttack(5,5);
+                setTimeout(()=>{
                 const toRemove = document.querySelector(".container");
                 toRemove.remove();
                 const newBoard = showGameboard(player1);
                 player1Container.append(newBoard);
+                },2000
+                )
 
             })
             row.appendChild(square);
