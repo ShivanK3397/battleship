@@ -37,8 +37,10 @@ function showGameboard(player){
 
 }
 
-function showBlankGameboard(player){
+function showBlankGameboard(player1,player2){
     const container = document.createElement("div");
+    const player1Container = document.querySelector(".player-1-gameboard");
+    const player1Gameboard = player1.getGameboard();
     container.classList.add("container");
     for (let i =0;i<10;i++){
  
@@ -50,8 +52,16 @@ function showBlankGameboard(player){
             square.dataset.index=`${i}${j}`;
             square.classList.add("square");
             square.addEventListener("click",()=>{
-                const gameboard = player.getGameboard();
+    
+                const gameboard = player2.getGameboard();
                 gameboard.recieveAttack(square.dataset.index[0],square.dataset.index[1])
+                const x = Math.floor(Math.random() * 11);
+                const y = Math.floor(Math.random() * 11);
+                player1Gameboard.recieveAttack(5,5);
+                const toRemove = document.querySelector(".container");
+                toRemove.remove();
+                const newBoard = showGameboard(player1);
+                player1Container.append(newBoard);
 
             })
             row.appendChild(square);
@@ -81,23 +91,14 @@ function playGame(){
     const newShip = new Ship(3);
     gameboard2.placeShip(5,5,"vertical",newShip);
 
-    const blankGameboard = showBlankGameboard(player2);
+    const blankGameboard = showBlankGameboard(player1,player2);
    
     const blankContainer = document.querySelector(".player-2-gameboard");
     blankContainer.append(blankGameboard);
-    while(true){
-        console.log('hi');
-        const x = Math.floor(Math.random() * 11);
-        const y = Math.floor(Math.random() * 11);
-        gameboard.recieveAttack(5,5);
-        const toRemove = document.querySelector(".container");
-        toRemove.remove();
-        const newBoard = showGameboard(player1);
-        container.append(newBoard);
-        break
+            
 
         
-    }
+
    
 
     
