@@ -50,6 +50,7 @@ class Gameboard{
     recieveAttack(x,y){
         if (this.board[x][y]===null){
             this.missedAttacks.push([x,y])
+            this.board[x][y]="missed";
         }
         else if(this.board[x][y]==="hit"){
             //Do Nothing
