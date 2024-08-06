@@ -51,6 +51,7 @@ class Gameboard{
         if (this.board[x][y]===null){
             this.missedAttacks.push([x,y])
             this.board[x][y]="missed";
+            return false;
         }
         else if(this.board[x][y]==="hit"){
             //Do Nothing
@@ -63,6 +64,7 @@ class Gameboard{
                 const index = this.ships.indexOf(ship);
                 this.ships.slice(index,1);
             }
+            return true;
 
         }
 

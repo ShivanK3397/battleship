@@ -45,6 +45,7 @@ function showBlankGameboard(player1,player2){
     const player1Container = document.querySelector(".player-1-gameboard");
     const player1Gameboard = player1.getGameboard();
     const player2Gameboard = player2.getGameboard().getBoard();
+    
     container.classList.add("container2");
     for (let i =0;i<10;i++){
  
@@ -61,11 +62,16 @@ function showBlankGameboard(player1,player2){
                 square.classList.add("square");
             }
             square.classList.add("square");
-            square.addEventListener("click",()=>{
+            square.addEventListener("click",(event)=>{
     
                 const gameboard = player2.getGameboard();
-                gameboard.recieveAttack(square.dataset.index[0],square.dataset.index[1]);
-                
+                const hit = gameboard.recieveAttack(square.dataset.index[0],square.dataset.index[1]);
+                if (hit===false){
+                event.target.classList.add("missed");
+                }
+                else{
+                    event.target.classList.add("hit");
+                }
                 const x = Math.floor(Math.random() * 11);
                 const y = Math.floor(Math.random() * 11);
                 player1Gameboard.recieveAttack(x,y);
@@ -89,30 +95,8 @@ function showBlankGameboard(player1,player2){
     return container;
 }
 
-function updateBlankGameboard(board){
-    const container = document.createElement("div");
-    container.classList.add("container2");
-    for (let i =0;i<10;i++){
- 
-        const row = document.createElement("div");
-        row.classList.add("row");
-        
-        for (let j = 0;j<10;j++){
-            const square=document.createElement("div");
-            square.dataset.index=`${i}${j}`;
-            if(board[i][j]==="missed"){
-                square.classList.add("missed");
-            }
-            else{
-                square.classList.add("square");
-            }
-        }
-        container.appendChild(row);
-    }
- return container
-    
-    
-}
+
+
 
 
 function playGame(){
