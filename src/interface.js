@@ -65,23 +65,30 @@ function showBlankGameboard(player1,player2){
             square.addEventListener("click",(event)=>{
     
                 const gameboard = player2.getGameboard();
-                const hit = gameboard.recieveAttack(square.dataset.index[0],square.dataset.index[1]);
-                if (hit===false){
-                event.target.classList.add("missed");
+                const missedAttacks=gameboard.getMissedAttacks();
+                console.log(`${square.dataset.index[0]}${square.dataset.index[1]}`)
+                if(missedAttacks.includes(`${square.dataset.index[0]}${square.dataset.index[1]}`)){
+                    console.log("test");
                 }
                 else{
-                    event.target.classList.add("hit");
-                }
-                const x = Math.floor(Math.random() * 11);
-                const y = Math.floor(Math.random() * 11);
-                player1Gameboard.recieveAttack(x,y);
-                setTimeout(()=>{
-                const toRemove = document.querySelector(".container");
-                toRemove.remove();
-                const newBoard = showGameboard(player1);
-                player1Container.append(newBoard);
-                },2000
-                )
+                    const hit = gameboard.recieveAttack(square.dataset.index[0],square.dataset.index[1]);
+                    if (hit===false){
+                        event.target.classList.add("missed");
+                    }
+                    else{
+                        event.target.classList.add("hit");
+                    }
+                    const x = Math.floor(Math.random() * 11);
+                    const y = Math.floor(Math.random() * 11);
+                    player1Gameboard.recieveAttack(x,y);
+                    setTimeout(()=>{
+                    const toRemove = document.querySelector(".container");
+                    toRemove.remove();
+                    const newBoard = showGameboard(player1);
+                    player1Container.append(newBoard);
+                    },2000
+                    )}
+                    console.log(missedAttacks);
 
             })
             row.appendChild(square);

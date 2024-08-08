@@ -21,6 +21,10 @@ class Gameboard{
         return this.board;
     }
 
+    getMissedAttacks(){
+        return this.missedAttacks;
+    }
+
     placeShip(x,y,direction,ship){
         if (direction==="vertical"){
             if(x+ship.getLength()>9){
@@ -49,7 +53,7 @@ class Gameboard{
 
     recieveAttack(x,y){
         if (this.board[x][y]===null){
-            this.missedAttacks.push([x,y])
+            this.missedAttacks.push(`${x}${y}`)
             this.board[x][y]="missed";
             return false;
         }
